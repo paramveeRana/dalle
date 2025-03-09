@@ -4,14 +4,16 @@ WORKDIR /app
 
 COPY package*.json ./
 
-# Install dependencies and nodemon globally
-RUN npm install && npm install -g nodemon
+# Install dependencies
+RUN npm install
 
 COPY . .
 
-EXPOSE 5000
+# Use the PORT environment variable
+ENV PORT=8080
 
-# Add nodemon config to prevent hanging
-ENV NODEMON_LEGACY_WATCH=true
+# Expose the port
+EXPOSE 8080
 
-CMD ["nodemon", "--legacy-watch", "index.js"] 
+# Start the application
+CMD ["npm", "start"] 
