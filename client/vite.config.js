@@ -9,11 +9,14 @@ export default defineConfig({
     port: 8082,
     proxy: {
       '/api/v1': {
-        target: process.env.VITE_SERVER_URL || 'http://server:5000',
+        target: process.env.VITE_SERVER_URL || 'http://localhost:8080',
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path
       }
     }
+  },
+  define: {
+    'process.env.VITE_SERVER_URL': JSON.stringify(process.env.VITE_SERVER_URL || 'http://localhost:8080')
   }
 })

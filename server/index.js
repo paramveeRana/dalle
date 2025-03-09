@@ -8,7 +8,12 @@ import dalleRoutes from './routes/dalleRoutes.js';
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://dalle-ai-image.vercel.app'] 
+    : ['http://localhost:8082'],
+  credentials: true,
+}));
 app.use(express.json({ limit: '50mb' }));
 
 app.use('/api/v1/post', postRoutes);
@@ -20,10 +25,12 @@ app.get('/', async (req, res) => {
   });
 });
 
+const PORT = process.env.PORT || 8080;
+
 const startServer = async () => {
   try {
     connectDB(process.env.MONGODB_URL);
-    app.listen(8080, () => console.log('Server started on port 8080'));
+    app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
   } catch (error) {
     console.log(error);
   }

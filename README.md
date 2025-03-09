@@ -1,6 +1,6 @@
 # DALL-E Image Generation App
 
-A Next.js application that generates images using OpenAI's DALL-E API. Built with Next.js, MongoDB, and TailwindCSS.
+A full-stack application that generates images using OpenAI's DALL-E API. Built with React, Node.js, and MongoDB.
 
 ## Features
 
@@ -8,32 +8,36 @@ A Next.js application that generates images using OpenAI's DALL-E API. Built wit
 - Save and share generated images
 - Modern and responsive UI
 - MongoDB integration for storing image data
-- Vercel-ready deployment
 
 ## Tech Stack
 
-- **Framework**: Next.js 14
-- **Styling**: TailwindCSS
+- **Frontend**: React, Vite, TailwindCSS
+- **Backend**: Node.js, Express
 - **Database**: MongoDB
+- **Container**: Docker
 - **API**: OpenAI DALL-E
 
 ## Prerequisites
 
 - Node.js 18+
+- Docker and Docker Compose
 - MongoDB Atlas account
 - OpenAI API key
-- Vercel account (for deployment)
 
 ## Environment Variables
 
-Create a `.env.local` file with the following variables:
+Create a `.env` file in the server directory with the following variables:
 
 ```env
 OPENAI_API_KEY=your_openai_api_key
+ORGANISATION_ID=your_organisation_id
 MONGODB_URL=your_mongodb_url
+JWT_SECRET=your_jwt_secret
+COOKIE_SECRET=your_cookie_secret
+PORT=8080
 ```
 
-## Local Development
+## Installation & Setup
 
 1. Clone the repository:
    ```bash
@@ -41,29 +45,32 @@ MONGODB_URL=your_mongodb_url
    cd DALLE
    ```
 
-2. Install dependencies:
+2. Using Docker:
    ```bash
-   npm install
+   docker-compose up --build
    ```
 
-3. Run the development server:
+3. Without Docker (Development):
    ```bash
+   # Install server dependencies
+   cd server
+   npm install
+
+   # Install client dependencies
+   cd ../client
+   npm install
+
+   # Run both client and server
+   cd ..
    npm run dev
    ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+## Usage
 
-## Deployment on Vercel
-
-1. Push your code to GitHub
-
-2. Connect your GitHub repository to Vercel
-
-3. Add your environment variables in the Vercel project settings:
-   - `OPENAI_API_KEY`
-   - `MONGODB_URL`
-
-4. Deploy! Vercel will automatically build and deploy your application.
+1. Access the application at `http://localhost:8082`
+2. Enter your name and prompt
+3. Click "Generate" to create an image
+4. Share the generated image with the community
 
 ## Contributing
 
